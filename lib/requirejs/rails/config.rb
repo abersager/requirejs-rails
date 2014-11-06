@@ -113,9 +113,7 @@ module Requirejs
                 raise Requirejs::ConfigError, "Almond build requires exactly one module, config has #{mods.length}."
               end
               mod = mods[0]
-              name = mod['name']
-              mod['name'] = 'almond'
-              mod['include'] = name
+              mod['include'] = 'almond'
           end
         end
         self[:build_config]
@@ -137,12 +135,7 @@ module Requirejs
       end
 
       def module_name_for(mod)
-        case self.loader
-          when :almond
-            return mod['include']
-          when :requirejs
-            return mod['name']
-        end
+        mod['name']
       end
 
       def get_binding

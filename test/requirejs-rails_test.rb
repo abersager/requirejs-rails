@@ -89,7 +89,13 @@ class RequirejsRailsConfigTest < ActiveSupport::TestCase
   test "build_config with almond should accept one module" do
     @cfg.loader = :almond
     @cfg.user_config = {'modules' => [{'name' => 'foo'}]}
-    assert_match 'almond', @cfg.build_config['modules'][0]['name']
+    assert_match 'foo', @cfg.build_config['modules'][0]['name']
+  end
+
+  test "build_config with almond adds almond dependency" do
+    @cfg.loader = :almond
+    @cfg.user_config = {'modules' => [{'name' => 'foo'}]}
+    assert_match 'almond', @cfg.build_config['modules'][0]['include']
   end
 
   test "build_config with almond must reject more than one module" do
