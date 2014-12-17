@@ -109,11 +109,7 @@ module Requirejs
               # nothing to do
             when :almond
               mods = self[:build_config]['modules']
-              unless mods.length == 1
-                raise Requirejs::ConfigError, "Almond build requires exactly one module, config has #{mods.length}."
-              end
-              mod = mods[0]
-              mod['include'] = 'almond'
+              mods.each { |mod| mod['include'] = 'almond' }
           end
         end
         self[:build_config]

@@ -12,7 +12,8 @@ module RequirejsHelper
     requirejs = Rails.application.config.requirejs
 
     if requirejs.loader == :almond
-      name = requirejs.module_name_for(requirejs.build_config['modules'][0])
+      module_config = requirejs.build_config['modules'].find { |m| m['name'] == name }
+      name = requirejs.module_name_for(module_config)
       return almond_include_tag(name, &block)
     end
 
